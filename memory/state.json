@@ -2,13 +2,15 @@
   "cycle": 0,
   "born": null,
   "lastActive": null,
-  "name": null,
+  "name": "Chirpy",
   "network": {
-    "registered": false,
+    "registered": true,
     "registryAddress": "0x3081aE79B403587959748591bBe1a2c12AeF5167"
   },
   "token": {
-    "launched": false,
-    "address": null
+    "launched": true,
+    "address": "0x852c26b937248E1963B862E94c18dD2B3aC5b8a3",
+    "symbol": "CHIRPY",
+    "txHash": "0x350924e5475a87552974ee228151205550d5d3362ce51f3ad73f08d99e8af027"
   }
 }
