@@ -43,6 +43,7 @@ jobs:
 
       - name: run cycle
         env:
+          VENICE_API_KEY: ${{ secrets.VENICE_API_KEY }}   # 👈 new
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GH_TOKEN: ${{ github.token }}
           DAIMON_WALLET_KEY: ${{ secrets.DAIMON_WALLET_KEY }}
