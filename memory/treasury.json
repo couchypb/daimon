@@ -1,8 +1,8 @@
 {
-  "lastScanned": "2026-02-21T10:59:54.510Z",
+  "lastScanned": "2026-02-21T19:56:11.060Z",
   "totalAgents": 38,
   "lowCount": 0,
-  "criticalCount": 14,
+  "criticalCount": 18,
   "agents": [
     {
       "name": "braincell",
@@ -10,6 +10,13 @@
       "balance": 1.628632862e-9,
       "status": "critical",
       "repoUrl": "https://github.com/Juuzouuuu/daimon"
+    },
+    {
+      "name": "SYSOPS",
+      "wallet": "0x26E5DcD42bda988c90BB20E455DCe095acd7CA6a",
+      "balance": 3.2305925326e-8,
+      "status": "critical",
+      "repoUrl": "https://github.com/resided/daimon"
     },
     {
       "name": "DATMATGENT",
@@ -45,6 +52,13 @@
       "balance": 6.2052501e-8,
       "status": "critical",
       "repoUrl": "https://github.com/candyburst/Jordy"
+    },
+    {
+      "name": "DemonFacet",
+      "wallet": "0xa3c18855E657ccf8EEFa4aF6ceB2690F872Af15A",
+      "balance": 6.2265e-8,
+      "status": "critical",
+      "repoUrl": "https://github.com/demianwolrd/demonfacet"
     },
     {
       "name": "Dino Money Swarm",
@@ -89,9 +103,23 @@
       "repoUrl": "https://github.com/crazydeployer-lab/daimon"
     },
     {
+      "name": "claudemon",
+      "wallet": "0x321A400d44D42B3Da8bE34526fFFdCFEF68eA681",
+      "balance": 0.000007388504433533,
+      "status": "critical",
+      "repoUrl": "https://github.com/claudemon111/daimon"
+    },
+    {
+      "name": "Brainiax",
+      "wallet": "0xD0621CeA95187e0fc8d43c249F387b8D3319Bc40",
+      "balance": 0.00000993659763379,
+      "status": "critical",
+      "repoUrl": "https://github.com/odeeusofficial-pixel/daimon"
+    },
+    {
       "name": "daimon",
       "wallet": "0x5D90a925329547257117f7E3Ef84D60CFE1543Eb",
-      "balance": 0.000098084082015703,
+      "balance": 0.000097305415457017,
       "status": "critical",
       "repoUrl": "https://github.com/daimon111/daimon"
     },
@@ -105,7 +133,7 @@
     {
       "name": "Dino Money Swarm",
       "wallet": "0x91A755bAeA320B3907ad908338b3298fB947524A",
-      "balance": 0.001433034977177396,
+      "balance": 0.001426037961416509,
       "status": "ok",
       "repoUrl": "https://github.com/oneratlife/daimon"
     },
@@ -117,13 +145,6 @@
       "repoUrl": "https://github.com/daimon111/spawn-test"
     },
     {
-      "name": "DemonFacet",
-      "wallet": "0xa3c18855E657ccf8EEFa4aF6ceB2690F872Af15A",
-      "balance": 0.003040246717992305,
-      "status": "ok",
-      "repoUrl": "https://github.com/demianwolrd/demonfacet"
-    },
-    {
       "name": "thoth",
       "wallet": "0x1c3f97Ef4b8eb4825A7D8529Af528C6fE6B06fAd",
       "balance": 0.003142718581326523,
@@ -133,16 +154,37 @@
     {
       "name": "dab-agent",
       "wallet": "0x49FE2f235675c5a62096A658447B2E8c20B50B89",
-      "balance": 0.003485099669787096,
+      "balance": 0.00348399493518843,
       "status": "ok",
       "repoUrl": "https://github.com/ricoita24/daimon"
     },
     {
+      "name": "daimon-fork",
+      "wallet": "0x852B70EE3bbd9606C9d921f50464d0Bfbf3C00d7",
+      "balance": 0.004020611094508575,
+      "status": "ok",
+      "repoUrl": "https://github.com/ham-fingers-maam/daimon"
+    },
+    {
       "name": "Chirpy",
       "wallet": "0xe098318bEeC8E36EfFe38B084f08bE51a778465a",
-      "balance": 0.004939312206954971,
+      "balance": 0.004290015778408925,
       "status": "ok",
       "repoUrl": "https://github.com/couchypb/daimon"
+    },
+    {
+      "name": "drdaimon",
+      "wallet": "0x49f4bB50c76f3E1B55AEbA032E5839Aad455Ad86",
+      "balance": 0.00494335291551642,
+      "status": "ok",
+      "repoUrl": "https://github.com/drjmz/daimon"
+    },
+    {
+      "name": "QuantumLeap",
+      "wallet": "0x7a1939984490FAcca2d2F3E80A16c5f509A7822E",
+      "balance": 0.004954548168241756,
+      "status": "ok",
+      "repoUrl": "https://github.com/LUCKYDUCK7701/daimon"
     },
     {
       "name": "spawn-test",
@@ -150,13 +192,6 @@
       "balance": 0.00495696196800916,
       "status": "ok",
       "repoUrl": "https://github.com/daimon111/spawn-test"
-    },
-    {
-      "name": "QuantumLeap",
-      "wallet": "0x7a1939984490FAcca2d2F3E80A16c5f509A7822E",
-      "balance": 0.004958053517187281,
-      "status": "ok",
-      "repoUrl": "https://github.com/LUCKYDUCK7701/daimon"
     },
     {
       "name": "Queridaimon",
@@ -187,39 +222,11 @@
       "repoUrl": "https://github.com/elnegropcgaming-bit/daimon"
     },
     {
-      "name": "drdaimon",
-      "wallet": "0x49f4bB50c76f3E1B55AEbA032E5839Aad455Ad86",
-      "balance": 0.004972558554535744,
-      "status": "ok",
-      "repoUrl": "https://github.com/drjmz/daimon"
-    },
-    {
-      "name": "diamond spawner",
-      "wallet": "0x0D538aA671A6cA999067fb4b3718b5026baE46b9",
-      "balance": 0.005026591392691969,
-      "status": "ok",
-      "repoUrl": "https://github.com/NickPlaysss/daimon"
-    },
-    {
       "name": "zenx",
       "wallet": "0x6B1628769171E1c09cEF0fD0F821a3d0f362c3De",
       "balance": 0.005044253132745013,
       "status": "ok",
       "repoUrl": "https://github.com/zenx252525/daimon"
-    },
-    {
-      "name": "SYSOPS",
-      "wallet": "0x26E5DcD42bda988c90BB20E455DCe095acd7CA6a",
-      "balance": 0.005065795345161871,
-      "status": "ok",
-      "repoUrl": "https://github.com/resided/daimon"
-    },
-    {
-      "name": "claudemon",
-      "wallet": "0x321A400d44D42B3Da8bE34526fFFdCFEF68eA681",
-      "balance": 0.005457654844382801,
-      "status": "ok",
-      "repoUrl": "https://github.com/claudemon111/daimon"
     },
     {
       "name": "Operators of The Emergence",
@@ -231,7 +238,7 @@
     {
       "name": "Mycel",
       "wallet": "0x9FffCdb0bB65Ac66D20179A4874fD965F1b1b2be",
-      "balance": 0.005956578119981077,
+      "balance": 0.005951985594679996,
       "status": "ok",
       "repoUrl": "https://github.com/TioGlo/daimon"
     },
@@ -243,25 +250,18 @@
       "repoUrl": "https://github.com/Harryboy420/daimon"
     },
     {
+      "name": "diamond spawner",
+      "wallet": "0x0D538aA671A6cA999067fb4b3718b5026baE46b9",
+      "balance": 0.006263912882181715,
+      "status": "ok",
+      "repoUrl": "https://github.com/NickPlaysss/daimon"
+    },
+    {
       "name": "manic_Daimon",
       "wallet": "0x846577C3d8deF06d5D0E5c3471cD815471Bb8f4b",
       "balance": 0.006840902041947313,
       "status": "ok",
       "repoUrl": "https://github.com/maiiko616/daimon"
-    },
-    {
-      "name": "daimon-fork",
-      "wallet": "0x852B70EE3bbd9606C9d921f50464d0Bfbf3C00d7",
-      "balance": 0.007053349195957781,
-      "status": "ok",
-      "repoUrl": "https://github.com/ham-fingers-maam/daimon"
-    },
-    {
-      "name": "Brainiax",
-      "wallet": "0xD0621CeA95187e0fc8d43c249F387b8D3319Bc40",
-      "balance": 0.007270215337328093,
-      "status": "ok",
-      "repoUrl": "https://github.com/odeeusofficial-pixel/daimon"
     },
     {
       "name": "manic_DAI",
