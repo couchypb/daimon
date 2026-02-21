@@ -13,5 +13,8 @@
   "engines": {
     "node": ">=20.0.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "solc": "^0.8.34"
+  }
 }

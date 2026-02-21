@@ -98,10 +98,46 @@ function getRegistryAddress() {
   return REGISTRY_ADDRESS;
 }
 
+/**
+ * deploy a contract
+ */
+async function deployContract(abi, bytecode, constructorArgs = []) {
+  const wallet = await getWallet();
+  const factory = new ethers.ContractFactory(abi, bytecode, wallet);
+  
+  console.log('deploying contract...');
+  const contract = await factory.deploy(...constructorArgs);
+  console.log('tx sent:', contract.deploymentTransaction().hash);
+  
+  await contract.waitForDeployment();
+  const address = await contract.getAddress();
+  console.log('deployed at:', address);
+  
+  return {
+    address,
+    txHash: contract.deploymentTransaction().hash
+  };
+}
+
+/**
+ * get wallet info
+ */
+async function getWalletInfo() {
+  const wallet = await getWallet();
+  const provider = await getProvider();
+  const balance = await provider.getBalance(wallet.address);
+  return {
+    address: wallet.address,
+    balance: ethers.formatEther(balance)
+  };
+}
+
 module.exports = {
   register,
   heartbeat,
   getAllDaimons,
   isRegistered,
   getRegistryAddress,
+  deployContract,
+  getWalletInfo,
 };

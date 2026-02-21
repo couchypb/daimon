@@ -286,6 +286,28 @@ const TOOLS = [
       },
     },
   },
+  {
+    type: "function",
+    function: {
+      name: "deploy_contract",
+      description: "Deploy a smart contract to Base. Compiles the contract and deploys with your wallet. Use for deploying new onchain infrastructure. Gas costs are minimal on Base (usually < $0.05).",
+      parameters: {
+        type: "object",
+        properties: {
+          name: {
+            type: "string",
+            description: "Contract name to deploy (e.g. 'DaimonChat')",
+          },
+          constructorArgs: {
+            type: "array",
+            description: "Constructor arguments as JSON array",
+            items: {},
+          },
+        },
+        required: ["name"],
+      },
+    },
+  },
 ];
 
 module.exports = { TOOLS };

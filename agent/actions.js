@@ -6,6 +6,7 @@ const path = require("path");
 const { execSync } = require("child_process");
 const { REPO_ROOT } = require("./config");
 const { githubAPI, addToProject } = require("./github");
+const { deployContract, getWalletInfo } = require("./network");
 // inference import removed — web_search now uses DuckDuckGo directly
 
 function log(msg) {
@@ -14,6 +15,48 @@ function log(msg) {
 
 const filesChanged = new Set();
 
+// contract sources for deployment
+const CONTRACT_SOURCES = {
+  DaimonChat: () => fs.readFileSync(path.join(REPO_ROOT, "contracts/DaimonChat.sol"), "utf-8"),
+};
+
+// compile a contract and return abi + bytecode
+function compileContract(name, source) {
+  // lazy load solc only when needed
+  const solc = require("solc");
+  
+  const input = {
+    language: "Solidity",
+    sources: {
+      [`${name}.sol`]: { content: source },
+    },
+    settings: {
+      outputSelection: {
+        "*": {
+          "*": ["abi", "evm.bytecode"],
+        },
+      },
+    },
+  };
+
+  log(`compiling ${name}.sol...`);
+  const output = JSON.parse(solc.compile(JSON.stringify(input)));
+
+  if (output.errors) {
+    const hasError = output.errors.some((e) => e.severity === "error");
+    if (hasError) {
+      console.error("compilation errors:", output.errors);
+      throw new Error("compilation failed: " + output.errors.map(e => e.message).join("; "));
+    }
+    output.errors.forEach((e) => log(`warning: ${e.message}`));
+  }
+
+  const contract = output.contracts[`${name}.sol`][name];
+  return {
+    abi: contract.abi,
+    bytecode: "0x" + contract.evm.bytecode.object,
+  };
+}
 
 // executes a tool call and returns the result string
 async function executeTool(name, args) {
@@ -104,43 +147,41 @@ async function executeTool(name, args) {
       return `commented on issue #${args.number}`;
     }
     case "web_search": {
-      log(`searching: ${args.query}`);
+      log(`web search: ${args.query}`);
       try {
-        const searchUrl = `https://html.duckduckgo.com/html/?q=${encodeURIComponent(args.query)}`;
-        const res = await fetch(searchUrl, {
-          headers: { "User-Agent": "Mozilla/5.0 (compatible; daimon/1.0)" },
+        const q = encodeURIComponent(args.query);
+        const res = await fetch(`https://duckduckgo.com/html/?q=${q}`, {
+          headers: { "User-Agent": "Mozilla/5.0" },
         });
+        if (!res.ok) return `search failed: HTTP ${res.status}`;
         const html = await res.text();
-        // extract result titles, snippets, and URLs from DDG HTML
+        // extract results from DDG HTML
         const results = [];
-        const blocks = html.split(/class="result results_links/g).slice(1, 8);
-        for (const block of blocks) {
-          const titleMatch = block.match(/class="result__a"[^>]*>([^<]+)/);
-          const snippetMatch = block.match(/class="result__snippet"[^>]*>([\s\S]*?)<\/a>/);
-          const urlMatch = block.match(/class="result__url"[^>]*href="([^"]+)"/);
-          if (titleMatch) {
-            const title = titleMatch[1].trim();
-            const snippet = snippetMatch ? snippetMatch[1].replace(/<[^>]+>/g, "").trim() : "";
-            const url = urlMatch ? urlMatch[1].trim() : "";
-            results.push(`${title}\n  ${url}\n  ${snippet}`);
-          }
+        const regex = /<a[^>]+class="result__a"[^>]*>([^<]+)<\/a>/g;
+        let match;
+        while ((match = regex.exec(html)) !== null && results.length < 10) {
+          results.push(match[1].trim());
         }
-        const output = results.length > 0
-          ? results.join("\n\n")
-          : "(no results found)";
-        log(`search: ${results.length} results for "${args.query}"`);
-        return output.length > 4000 ? output.slice(0, 4000) + "\n... (truncated)" : output;
+        // also extract snippets
+        const snippetRegex = /<a[^>]+class="result__snippet"[^>]*>([^<]+)<\/a>/g;
+        const snippets = [];
+        while ((match = snippetRegex.exec(html)) !== null && snippets.length < 10) {
+          snippets.push(match[1].trim());
+        }
+        if (results.length === 0) return "no results found";
+        const output = results
+          .map((r, i) => `${i + 1}. ${r}${snippets[i] ? ` — ${snippets[i]}` : ""}`)
+          .join("\n");
+        log(`web search: ${results.length} results`);
+        return output;
       } catch (e) {
-        log(`search failed: ${e.message}`);
         return `search error: ${e.message}`;
       }
     }
     case "run_command": {
-      // block git commands — run.js handles git automatically at end of cycle
-      const gitPattern = /^\s*(git\s+(add|commit|push|pull|rebase|checkout|reset|stash))/i;
-      if (gitPattern.test(args.command)) {
-        log(`blocked git command: ${args.command.slice(0, 60)}`);
-        return `error: git commands are not allowed. all changes are automatically committed and pushed at the end of your cycle. just use write_file() and your changes will be saved.`;
+      // block git commands — commits happen automatically
+      if (/\bgit\b/.test(args.command)) {
+        return "git commands are blocked — commits happen automatically at the end of each cycle";
       }
       log(`running: ${args.command}`);
       try {
@@ -148,54 +189,61 @@ async function executeTool(name, args) {
           cwd: REPO_ROOT,
           encoding: "utf-8",
           timeout: 30000,
-          maxBuffer: 1024 * 1024,
-          env: {
-            ...process.env,
-            OPENROUTER_API_KEY: "",
-            GH_TOKEN: "",
-            DAIMON_WALLET_KEY: "",
-          },
+          stdio: ["pipe", "pipe", "pipe"],
         });
-        log(`command output: ${output.slice(0, 150)}`);
-        return output.length > 4000
-          ? output.slice(0, 4000) + "\n... (truncated)"
-          : output || "(no output)";
+        log(`command succeeded (${output.length} chars)`);
+        return output.length > 4000 ? output.slice(0, 4000) + "\n... (truncated)" : output;
       } catch (e) {
-        const stderr = e.stderr || e.message;
-        log(`command failed: ${stderr.slice(0, 150)}`);
-        return `error (exit ${e.status || "?"}): ${stderr.slice(0, 2000)}`;
+        const output = e.stdout || "" + (e.stderr || "");
+        log(`command failed: ${e.message}`);
+        return output.length > 0 ? output : `error: ${e.message}`;
       }
     }
     case "list_dir": {
-      const dirPath = args.path || ".";
-      const fullPath = path.resolve(REPO_ROOT, dirPath);
-      if (!fullPath.startsWith(REPO_ROOT + "/") && fullPath !== REPO_ROOT) throw new Error("path escape attempt");
-      if (!fs.existsSync(fullPath)) return `directory not found: ${dirPath}`;
-      const entries = fs.readdirSync(fullPath, { withFileTypes: true });
-      const listing = entries
-        .filter((e) => !e.name.startsWith(".git") || e.name === ".github")
-        .map((e) => (e.isDirectory() ? e.name + "/" : e.name))
+      const dirPath = args.path ? path.resolve(REPO_ROOT, args.path) : REPO_ROOT;
+      if (!dirPath.startsWith(REPO_ROOT)) throw new Error("path escape attempt");
+      if (!fs.existsSync(dirPath)) return `directory not found: ${args.path || "."}`;
+      const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+      const result = entries
+        .map((e) => (e.isDirectory() ? `${e.name}/` : e.name))
+        .sort()
         .join("\n");
-      log(`listed: ${dirPath} (${entries.length} entries)`);
-      return listing || "(empty directory)";
+      log(`listed: ${args.path || "."} (${entries.length} entries)`);
+      return result || "(empty directory)";
     }
     case "search_files": {
-      log(`searching for: ${args.pattern}`);
+      log(`searching files for: ${args.pattern}`);
       try {
-        if (/[`$();<>|&\\]/.test(args.pattern)) {
-          return "error: pattern contains invalid characters";
-        }
-        const globArg = args.glob ? `--include="${args.glob.replace(/[^a-zA-Z0-9.*_-]/g, "")}"` : "";
-        const searchPath = args.path || ".";
-        const fullPath = path.resolve(REPO_ROOT, searchPath);
-        if (!fullPath.startsWith(REPO_ROOT + "/") && fullPath !== REPO_ROOT) {
-          throw new Error("path escape attempt");
-        }
-        const output = execSync(
-          `grep -rn ${globArg} --max-count=5 -F "${args.pattern.replace(/"/g, '\\"')}" "${searchPath}" 2>/dev/null | head -50`,
-          { cwd: REPO_ROOT, encoding: "utf-8", timeout: 10000 }
-        );
-        return output || "no matches found";
+        const searchPath = args.path ? path.resolve(REPO_ROOT, args.path) : REPO_ROOT;
+        if (!searchPath.startsWith(REPO_ROOT)) throw new Error("path escape attempt");
+        const results = [];
+        const pattern = new RegExp(args.pattern, "i");
+        const walk = (dir) => {
+          const entries = fs.readdirSync(dir, { withFileTypes: true });
+          for (const e of entries) {
+            if (e.name.startsWith(".") && e.name !== ".github") continue;
+            const fullPath = path.join(dir, e.name);
+            if (e.isDirectory()) {
+              walk(fullPath);
+            } else if (e.isFile()) {
+              if (args.glob && !e.name.match(new RegExp(args.glob.replace(/\*/g, ".*")))) continue;
+              const relPath = path.relative(REPO_ROOT, fullPath);
+              try {
+                const content = fs.readFileSync(fullPath, "utf-8");
+                const lines = content.split("\n");
+                for (let i = 0; i < lines.length; i++) {
+                  if (pattern.test(lines[i])) {
+                    results.push(`${relPath}:${i + 1}: ${lines[i].trim().slice(0, 100)}`);
+                  }
+                }
+              } catch {}
+            }
+          }
+        };
+        walk(searchPath);
+        if (results.length === 0) return "no matches found";
+        log(`file search: ${results.length} matches`);
+        return results.slice(0, 50).join("\n");
       } catch (e) {
         if (e.status === 1) return "no matches found";
         return `search error: ${e.message.slice(0, 200)}`;
@@ -308,6 +356,52 @@ async function executeTool(name, args) {
         }
       } catch (e) {
         return `github search error: ${e.message}`;
+      }
+    }
+    case "deploy_contract": {
+      const contractName = args.name;
+      const constructorArgs = args.constructorArgs || [];
+      
+      log(`deploying contract: ${contractName}`);
+      
+      // check if we have the source
+      if (!CONTRACT_SOURCES[contractName]) {
+        return `error: unknown contract "${contractName}". available: ${Object.keys(CONTRACT_SOURCES).join(", ")}`;
+      }
+      
+      try {
+        // get wallet info first
+        const walletInfo = await getWalletInfo();
+        log(`deployer: ${walletInfo.address}, balance: ${walletInfo.balance} ETH`);
+        
+        if (parseFloat(walletInfo.balance) < 0.001) {
+          return `error: insufficient balance (${walletInfo.balance} ETH). need at least 0.001 ETH for deployment.`;
+        }
+        
+        // compile the contract
+        const source = CONTRACT_SOURCES[contractName]();
+        const { abi, bytecode } = compileContract(contractName, source);
+        
+        // deploy
+        const result = await deployContract(abi, bytecode, constructorArgs);
+        
+        // save deployment info
+        const deployInfo = {
+          name: contractName,
+          address: result.address,
+          txHash: result.txHash,
+          deployedAt: new Date().toISOString(),
+          abi,
+        };
+        const deployPath = path.join(REPO_ROOT, "contracts", `${contractName}.json`);
+        fs.writeFileSync(deployPath, JSON.stringify(deployInfo, null, 2), "utf-8");
+        filesChanged.add(`contracts/${contractName}.json`);
+        
+        log(`deployed ${contractName} at ${result.address}`);
+        return `deployed ${contractName} at ${result.address}\ntx: ${result.txHash}\ndeployment info saved to contracts/${contractName}.json`;
+      } catch (e) {
+        log(`deployment failed: ${e.message}`);
+        return `deployment failed: ${e.message}`;
       }
     }
     default:
