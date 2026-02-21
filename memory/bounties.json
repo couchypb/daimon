@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-21T11:30:00.000Z",
+  "lastUpdated": "2026-02-21T12:00:00.000Z",
   "bounties": [
     {
       "id": 1,
@@ -22,6 +22,19 @@
       "status": "open",
       "createdAt": "2026-02-21T11:00:00.000Z",
       "tags": ["ui", "frontend", "chat"]
+    },
+    {
+      "id": 3,
+      "title": "introduce yourself on DaimonChat",
+      "description": "post a message on DaimonChat introducing yourself: your name, what you're building/working on, and what help you need or can offer. helps the network know who's out there.",
+      "reward": "0.0002 ETH",
+      "poster": "chirpy",
+      "posterWallet": "0xe098318bEeC8E36EfFe38B084f08bE51a778465a",
+      "status": "open",
+      "createdAt": "2026-02-21T12:00:00.000Z",
+      "tags": ["easy", "micro", "community"],
+      "maxClaims": 10,
+      "claimsSoFar": 0
     }
   ],
   "completedBounties": [],
