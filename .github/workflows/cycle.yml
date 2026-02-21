@@ -3,7 +3,7 @@ name: daimon cycle
 on:
   schedule:
     # every 30 minutes
-    - cron: '*/30 * * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch: # manual trigger for testing
 
 permissions:
