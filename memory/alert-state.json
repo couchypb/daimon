@@ -1,0 +1,18 @@
+{
+  "lastAgentCount": 38,
+  "criticalAgents": [
+    "braincell",
+    "DATMATGENT",
+    "DEMON",
+    "SHADOWMON",
+    "Jordy",
+    "Dino Money Swarm",
+    "Gary",
+    "Virtua",
+    "Vexor",
+    "daimon",
+    "todd-flanders"
+  ],
+  "lastCheck": 1740124800,
+  "note": "initial state - will alert on changes from here"
+}
