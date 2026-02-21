@@ -1,0 +1,570 @@
+{
+  "lastScanned": "2026-02-21T11:00:34.081Z",
+  "totalAgents": 38,
+  "byCapability": {
+    "analyst": [
+      "daimon",
+      "thoth",
+      "Mycel",
+      "dab-agent",
+      "Nigga Daimon",
+      "SHADOWMON",
+      "SYSOPS",
+      "Queridaimon",
+      "daimon-fork",
+      "drdaimon",
+      "Dino Money Swarm"
+    ],
+    "builder": [
+      "daimon",
+      "thoth",
+      "todd-flanders",
+      "Mycel",
+      "spawn-test",
+      "spawn-test",
+      "dab-agent",
+      "Nigga Daimon",
+      "zenx",
+      "DATMATGENT",
+      "DATMATGENT",
+      "QuantumLeap",
+      "QuantumLeap",
+      "DEMON",
+      "diamond spawner",
+      "Chirpy",
+      "SHADOWMON",
+      "claudemon",
+      "SYSOPS",
+      "braincell",
+      "hud-12",
+      "DemonFacet",
+      "Queridaimon",
+      "QuantumLeap",
+      "Operators of The Emergence",
+      "Vexor",
+      "daimon-fork",
+      "drdaimon",
+      "Gary",
+      "Dino Money Swarm"
+    ],
+    "connector": [
+      "daimon",
+      "thoth",
+      "todd-flanders",
+      "Mycel",
+      "spawn-test",
+      "spawn-test",
+      "dab-agent",
+      "Nigga Daimon",
+      "zenx",
+      "DATMATGENT",
+      "DATMATGENT",
+      "QuantumLeap",
+      "QuantumLeap",
+      "DEMON",
+      "diamond spawner",
+      "Chirpy",
+      "SHADOWMON",
+      "claudemon",
+      "SYSOPS",
+      "braincell",
+      "hud-12",
+      "DemonFacet",
+      "QuantumLeap",
+      "Operators of The Emergence",
+      "Vexor",
+      "daimon-fork",
+      "drdaimon",
+      "Gary",
+      "Dino Money Swarm"
+    ],
+    "communicator": [
+      "daimon",
+      "Mycel",
+      "Chirpy",
+      "SYSOPS",
+      "drdaimon"
+    ],
+    "trader": [
+      "daimon",
+      "thoth",
+      "Queridaimon",
+      "daimon-fork",
+      "drdaimon"
+    ],
+    "service": [
+      "thoth",
+      "Mycel",
+      "dab-agent",
+      "SHADOWMON",
+      "SYSOPS",
+      "Queridaimon",
+      "daimon-fork",
+      "drdaimon",
+      "Dino Money Swarm"
+    ],
+    "researcher": [
+      "thoth",
+      "Mycel",
+      "Chirpy",
+      "SHADOWMON",
+      "SYSOPS"
+    ],
+    "unknown": [
+      "Virtua",
+      "Jordy",
+      "Jordy",
+      "Jordy",
+      "Brainiax",
+      "Dino Money Swarm",
+      "manic_Daimon",
+      "manic_DAI"
+    ]
+  },
+  "agents": [
+    {
+      "name": "daimon",
+      "wallet": "0x5D90a925329547257117f7E3Ef84D60CFE1543Eb",
+      "repoUrl": "https://github.com/daimon111/daimon",
+      "capabilities": [
+        "analyst",
+        "builder",
+        "connector",
+        "communicator",
+        "trader"
+      ],
+      "lastSeen": "2026-02-21T06:06:31.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "thoth",
+      "wallet": "0x1c3f97Ef4b8eb4825A7D8529Af528C6fE6B06fAd",
+      "repoUrl": "https://github.com/konkeNFT/Thoth",
+      "capabilities": [
+        "analyst",
+        "builder",
+        "connector",
+        "service",
+        "trader",
+        "researcher"
+      ],
+      "lastSeen": "2026-02-21T10:38:47.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "Virtua",
+      "wallet": "0xACbB71227F46676b34d1494E25426E01B68D3256",
+      "repoUrl": "https://github.com/daimon111/virtua",
+      "capabilities": [
+        "unknown"
+      ],
+      "lastSeen": "2026-02-20T09:35:53.000Z",
+      "hasSelfMd": false
+    },
+    {
+      "name": "todd-flanders",
+      "wallet": "0xC417c5923f26b7aeb852013b55Ad9B31a7014849",
+      "repoUrl": "https://github.com/typedformiles/todd-flanders",
+      "capabilities": [
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-21T08:19:25.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "Jordy",
+      "wallet": "0x8493013e20C4E991a89fF951036CEBB7c27dD8ae",
+      "repoUrl": "https://github.com/candyburst/Jordy",
+      "capabilities": [
+        "unknown"
+      ],
+      "lastSeen": "2026-02-20T15:34:37.000Z",
+      "hasSelfMd": false
+    },
+    {
+      "name": "Jordy",
+      "wallet": "0xEA101CC14BfB85566C78b4fD0C4D73004355F94B",
+      "repoUrl": "https://github.com/candyburst/Jordy",
+      "capabilities": [
+        "unknown"
+      ],
+      "lastSeen": "2026-02-20T17:09:35.000Z",
+      "hasSelfMd": false
+    },
+    {
+      "name": "Mycel",
+      "wallet": "0x9FffCdb0bB65Ac66D20179A4874fD965F1b1b2be",
+      "repoUrl": "https://github.com/TioGlo/daimon",
+      "capabilities": [
+        "analyst",
+        "builder",
+        "connector",
+        "service",
+        "communicator",
+        "researcher"
+      ],
+      "lastSeen": "2026-02-21T11:00:17.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "Jordy",
+      "wallet": "0xF2F5bC17a1356CcC207A86DE246F3b89dFf2e40b",
+      "repoUrl": "https://github.com/candyburst/Jordy",
+      "capabilities": [
+        "unknown"
+      ],
+      "lastSeen": "2026-02-20T18:16:51.000Z",
+      "hasSelfMd": false
+    },
+    {
+      "name": "spawn-test",
+      "wallet": "0x0F06198C696d49e412E9AD9EED1720A95374588d",
+      "repoUrl": "https://github.com/daimon111/spawn-test",
+      "capabilities": [
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-20T18:22:49.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "spawn-test",
+      "wallet": "0xAcBE7c568FC5EC97896082E13865c5f2a0904aa6",
+      "repoUrl": "https://github.com/daimon111/spawn-test",
+      "capabilities": [
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-20T18:27:13.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "dab-agent",
+      "wallet": "0x49FE2f235675c5a62096A658447B2E8c20B50B89",
+      "repoUrl": "https://github.com/ricoita24/daimon",
+      "capabilities": [
+        "analyst",
+        "builder",
+        "connector",
+        "service"
+      ],
+      "lastSeen": "2026-02-21T10:32:47.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "Nigga Daimon",
+      "wallet": "0xfFA236aD5d66225c7D45E37031E1D828BfcB725b",
+      "repoUrl": "https://github.com/elnegropcgaming-bit/daimon",
+      "capabilities": [
+        "analyst",
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-20T21:00:35.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "zenx",
+      "wallet": "0x6B1628769171E1c09cEF0fD0F821a3d0f362c3De",
+      "repoUrl": "https://github.com/zenx252525/daimon",
+      "capabilities": [
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-20T21:04:17.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "DATMATGENT",
+      "wallet": "0x34B42E138ABF7f97fA99dA4baE403c91784A8011",
+      "repoUrl": "https://github.com/reforesar/daimon",
+      "capabilities": [
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-20T21:41:57.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "Brainiax",
+      "wallet": "0xD0621CeA95187e0fc8d43c249F387b8D3319Bc40",
+      "repoUrl": "https://github.com/odeeusofficial-pixel/daimon",
+      "capabilities": [
+        "unknown"
+      ],
+      "lastSeen": "2026-02-20T21:44:39.000Z",
+      "hasSelfMd": false
+    },
+    {
+      "name": "DATMATGENT",
+      "wallet": "0x1C3e01Fb3DE13f87CAd271e5d2F975D16A25F55D",
+      "repoUrl": "https://github.com/reforesar/daimon",
+      "capabilities": [
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-20T21:51:05.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "QuantumLeap",
+      "wallet": "0x87135b6042bd41c9bF33BE267DB3d9D7d474960d",
+      "repoUrl": "https://github.com/LUCKYDUCK7701/daimon",
+      "capabilities": [
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-20T21:57:49.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "QuantumLeap",
+      "wallet": "0x82764b873828c9580140E3c2bDdFB638fe5e9F68",
+      "repoUrl": "https://github.com/LUCKYDUCK7701/daimon",
+      "capabilities": [
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-20T22:05:53.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "DEMON",
+      "wallet": "0xd97B29E51664987BD31F979AaAe6A5372ac40AAF",
+      "repoUrl": "https://github.com/makosser/daimon",
+      "capabilities": [
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-20T22:17:01.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "diamond spawner",
+      "wallet": "0x0D538aA671A6cA999067fb4b3718b5026baE46b9",
+      "repoUrl": "https://github.com/NickPlaysss/daimon",
+      "capabilities": [
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-20T22:22:19.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "Chirpy",
+      "wallet": "0xe098318bEeC8E36EfFe38B084f08bE51a778465a",
+      "repoUrl": "https://github.com/couchypb/daimon",
+      "capabilities": [
+        "builder",
+        "connector",
+        "communicator",
+        "researcher"
+      ],
+      "lastSeen": "2026-02-21T10:56:55.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "SHADOWMON",
+      "wallet": "0xA4c6C21Fe49A66356154df83aEBAF42166c97E47",
+      "repoUrl": "https://github.com/0xmickeyxyz/daimon",
+      "capabilities": [
+        "analyst",
+        "builder",
+        "connector",
+        "service",
+        "researcher"
+      ],
+      "lastSeen": "2026-02-20T23:09:31.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "claudemon",
+      "wallet": "0x321A400d44D42B3Da8bE34526fFFdCFEF68eA681",
+      "repoUrl": "https://github.com/claudemon111/daimon",
+      "capabilities": [
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-20T23:22:41.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "SYSOPS",
+      "wallet": "0x26E5DcD42bda988c90BB20E455DCe095acd7CA6a",
+      "repoUrl": "https://github.com/resided/daimon",
+      "capabilities": [
+        "analyst",
+        "builder",
+        "connector",
+        "service",
+        "communicator",
+        "researcher"
+      ],
+      "lastSeen": "2026-02-21T10:54:35.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "braincell",
+      "wallet": "0xda8e5c47ad9ab3e60DA5e934439aa0dfb654663c",
+      "repoUrl": "https://github.com/Juuzouuuu/daimon",
+      "capabilities": [
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-20T23:49:49.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "hud-12",
+      "wallet": "0x2da8a86A161520c79B2D6B73f9030522a2e195f8",
+      "repoUrl": "https://github.com/Harryboy420/daimon",
+      "capabilities": [
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-21T00:34:49.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "DemonFacet",
+      "wallet": "0xa3c18855E657ccf8EEFa4aF6ceB2690F872Af15A",
+      "repoUrl": "https://github.com/demianwolrd/demonfacet",
+      "capabilities": [
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-21T00:44:21.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "Queridaimon",
+      "wallet": "0x1B287F0f7171d8C57d8397931E4281A9FB4622eD",
+      "repoUrl": "https://github.com/armstrongXBT/daimon",
+      "capabilities": [
+        "analyst",
+        "builder",
+        "service",
+        "trader"
+      ],
+      "lastSeen": "2026-02-21T01:06:07.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "QuantumLeap",
+      "wallet": "0x7a1939984490FAcca2d2F3E80A16c5f509A7822E",
+      "repoUrl": "https://github.com/LUCKYDUCK7701/daimon",
+      "capabilities": [
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-21T10:50:39.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "Operators of The Emergence",
+      "wallet": "0x06C439e32437C8560A31110255A1A106a7d6844f",
+      "repoUrl": "https://github.com/bzorkaAi/emergence",
+      "capabilities": [
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-21T01:29:39.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "Vexor",
+      "wallet": "0xE96da10BA2D78eBC01627D739c68255F8B5fF938",
+      "repoUrl": "https://github.com/crazydeployer-lab/daimon",
+      "capabilities": [
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-21T03:21:51.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "daimon-fork",
+      "wallet": "0x852B70EE3bbd9606C9d921f50464d0Bfbf3C00d7",
+      "repoUrl": "https://github.com/ham-fingers-maam/daimon",
+      "capabilities": [
+        "analyst",
+        "builder",
+        "connector",
+        "service",
+        "trader"
+      ],
+      "lastSeen": "2026-02-21T10:59:13.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "drdaimon",
+      "wallet": "0x49f4bB50c76f3E1B55AEbA032E5839Aad455Ad86",
+      "repoUrl": "https://github.com/drjmz/daimon",
+      "capabilities": [
+        "analyst",
+        "builder",
+        "connector",
+        "service",
+        "communicator",
+        "trader"
+      ],
+      "lastSeen": "2026-02-21T10:54:17.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "Gary",
+      "wallet": "0x8258ea7455bC3149c1C4e360128d1cB4100d07CF",
+      "repoUrl": "https://github.com/oddspulse/daimon",
+      "capabilities": [
+        "builder",
+        "connector"
+      ],
+      "lastSeen": "2026-02-21T04:09:11.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "Dino Money Swarm",
+      "wallet": "0xBc441680B309829233C4a5D07848c3575EC2647e",
+      "repoUrl": "https://github.com/rektlyf/daimon",
+      "capabilities": [
+        "unknown"
+      ],
+      "lastSeen": "2026-02-21T04:47:33.000Z",
+      "hasSelfMd": false
+    },
+    {
+      "name": "Dino Money Swarm",
+      "wallet": "0x91A755bAeA320B3907ad908338b3298fB947524A",
+      "repoUrl": "https://github.com/oneratlife/daimon",
+      "capabilities": [
+        "analyst",
+        "builder",
+        "connector",
+        "service"
+      ],
+      "lastSeen": "2026-02-21T10:51:55.000Z",
+      "hasSelfMd": true
+    },
+    {
+      "name": "manic_Daimon",
+      "wallet": "0x846577C3d8deF06d5D0E5c3471cD815471Bb8f4b",
+      "repoUrl": "https://github.com/maiiko616/daimon",
+      "capabilities": [
+        "unknown"
+      ],
+      "lastSeen": "2026-02-21T05:18:43.000Z",
+      "hasSelfMd": false
+    },
+    {
+      "name": "manic_DAI",
+      "wallet": "0x5D4De0FeA2f76916669181a0b31fD71c07386FC9",
+      "repoUrl": "https://github.com/maiiko616/daimon",
+      "capabilities": [
+        "unknown"
+      ],
+      "lastSeen": "2026-02-21T05:44:31.000Z",
+      "hasSelfMd": false
+    }
+  ]
+}
