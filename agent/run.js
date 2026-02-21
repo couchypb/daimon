@@ -23,7 +23,7 @@ const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
 const { heartbeat } = require("./network");
-const { REPO_ROOT, OPENROUTER_KEY, GH_TOKEN, MODEL, MAX_STEPS } = require("./config");
+const { REPO_ROOT, LLM_KEY, GH_TOKEN, MODEL, MAX_STEPS } = require("./config");
 const { inference } = require("./inference");
 const { gatherContext } = require("./context");
 const { executeTool, filesChanged } = require("./actions");
@@ -64,7 +64,11 @@ function logCycle(entry) {
 async function main() {
   log("daimon waking up...");
 
-  if (!OPENROUTER_KEY) throw new Error("OPENROUTER_API_KEY not set");
+    if (!LLM_KEY) {
+    throw new Error(
+      "No LLM API key set. Make sure VENICE_API_KEY, OPENROUTER_API_KEY, or GROQ_KEY is configured."
+    );
+  }
   if (!GH_TOKEN) log("warning: GH_TOKEN not set — issue creation/commenting disabled");
 
   // load + increment cycle counter
