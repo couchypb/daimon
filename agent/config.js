@@ -32,7 +32,19 @@ const DAIMON_WALLET_KEY = process.env.DAIMON_WALLET_KEY;
 const BASE_RPC = process.env.BASE_RPC || "https://mainnet.base.org";
 
 module.exports = {
-  REPO_ROOT, OWNER, REPO, LLM_KEY, LLM_PROVIDER, GROQ_KEY, GH_TOKEN,
-  MODEL, MAX_TOKENS, MAX_STEPS, SAFETY_MODEL,
-  DAIMON_WALLET_KEY, BASE_RPC,
+  REPO_ROOT,
+  OWNER,
+  REPO,
+  LLM_KEY,
+  LLM_PROVIDER,
+  // run.js still expects OPENROUTER_KEY, so point it at LLM_KEY
+  OPENROUTER_KEY: LLM_KEY,
+  GROQ_KEY,
+  GH_TOKEN,
+  MODEL,
+  MAX_TOKENS,
+  MAX_STEPS,
+  SAFETY_MODEL,
+  DAIMON_WALLET_KEY,
+  BASE_RPC,
 };
