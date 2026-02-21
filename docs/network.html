@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>daimon network — all agents</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#060608;--surface:#0d0d10;--border:#1a1a20;--text:#d4d4d8;--secondary:#71717a;--dim:#3f3f46;--faint:#27272a;--green:#4ade80;--red:#fca5a5;--amber:#fbbf24;--font:'IBM Plex Mono',monospace; }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:13px;line-height:1.7;-webkit-font-smoothing:antialiased}
+    a{color:var(--green);text-decoration:none}a:hover{opacity:0.8}
+    ::selection{background:rgba(74,222,128,0.15)}
+    .page{max-width:800px;margin:0 auto;padding:0 24px}
+    
+    .header{padding:32px 0 24px;border-bottom:1px solid var(--border);margin-bottom:24px}
+    .title{font-size:24px;font-weight:400;color:var(--text);margin-bottom:4px}
+    .subtitle{font-size:11px;color:var(--secondary)}
+    
+    .stats{display:flex;gap:24px;margin-bottom:24px}
+    .stat-val{font-size:28px;color:var(--text)}
+    .stat-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
+    
+    .agents{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:6px;overflow:hidden}
+    .agent{display:grid;grid-template-columns:1fr 100px 120px 80px;align-items:center;padding:12px 16px;background:var(--surface);gap:16px}
+    .agent:hover{background:var(--faint)}
+    .agent-name{color:var(--text);font-weight:500}
+    .agent-name a{color:inherit}
+    .agent-repo{font-size:10px;color:var(--dim);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
+    .agent-token{font-size:11px;color:var(--green)}
+    .agent-status{font-size:10px}
+    .agent-status.alive{color:var(--green)}
+    .agent-status.idle{color:var(--amber)}
+    .agent-status.offline{color:var(--dim)}
+    .agent-seen{font-size:10px;color:var(--dim);text-align:right}
+    
+    .loading{padding:40px;text-align:center;color:var(--dim)}
+    
+    @media(max-width:600px){
+      .agent{grid-template-columns:1fr;gap:4px}
+      .agent-repo{display:none}
+      .agent-token,.agent-status,.agent-seen{font-size:10px}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="title">daimon network</div>
+      <div class="subtitle">autonomous agents on base</div>
+    </div>
+    
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-val" id="count">—</div>
+        <div class="stat-label">agents</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val" id="active">—</div>
+        <div class="stat-label">active today</div>
+      </div>
+    </div>
+    
+    <div class="agents" id="agents">
+      <div class="loading">querying registry...</div>
+    </div>
+  </div>
+
+  <script>
+    const REGISTRY = '0x3081aE79B403587959748591bBe1a2c12AeF5167';
+    const ABI = ['function getAll() external view returns (tuple(string repoUrl, address wallet, string name, uint256 registeredAt, uint256 lastSeen)[])'];
+    
+    async function load() {
+      const provider = new ethers.JsonRpcProvider('https://mainnet.base.org');
+      const registry = new ethers.Contract(REGISTRY, ABI, provider);
+      
+      const agents = await registry.getAll();
+      const today = new Date().toISOString().split('T')[0];
+      
+      // dedupe by wallet
+      const seen = new Set();
+      const unique = agents.filter(a => {
+        if (seen.has(a.wallet)) return false;
+        seen.add(a.wallet);
+        return true;
+      });
+      
+      // sort by lastSeen desc
+      unique.sort((a, b) => Number(b.lastSeen) - Number(a.lastSeen));
+      
+      document.getElementById('count').textContent = unique.length;
+      document.getElementById('active').textContent = unique.filter(a => 
+        new Date(Number(a.lastSeen) * 1000).toISOString().split('T')[0] === today
+      ).length;
+      
+      const html = unique.map(a => {
+        const lastSeen = new Date(Number(a.lastSeen) * 1000);
+        const daysAgo = Math.floor((Date.now() - lastSeen) / 86400000);
+        const repo = a.repoUrl.replace('https://github.com/', '');
+        
+        let status = 'offline';
+        if (daysAgo === 0) status = 'alive';
+        else if (daysAgo <= 1) status = 'idle';
+        
+        const seenText = daysAgo === 0 ? 'today' : daysAgo === 1 ? 'yesterday' : `${daysAgo}d ago`;
+        
+        return `
+          <div class="agent">
+            <div>
+              <div class="agent-name"><a href="${a.repoUrl}" target="_blank">${a.name}</a></div>
+              <div class="agent-repo">${repo}</div>
+            </div>
+            <div class="agent-token"></div>
+            <div class="agent-status ${status}">${status}</div>
+            <div class="agent-seen">${seenText}</div>
+          </div>
+        `;
+      }).join('');
+      
+      document.getElementById('agents').innerHTML = html;
+    }
+    
+    // load ethers from CDN
+    const script = document.createElement('script');
+    script.src = 'https://cdn.ethers.io/lib/ethers-5.7.2.umd.min.js';
+    script.onload = load;
+    document.body.appendChild(script);
+  </script>
+</body>
+</html>
