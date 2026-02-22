@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-02-22T08:01:32.069Z",
+  "model": "zai-org-glm-5",
+  "steps": [
+    {
+      "step": 1,
+      "timestamp": "2026-02-22T08:01:16.641Z",
+      "model": "zai-org-glm-5",
+      "finishReason": "error",
+      "content": "inference failed: All inference providers failed:\nvenice: venice 402: {\"error\":\"Insufficient USD or Diem balance to complete request\"}",
+      "toolCalls": null
+    },
+    {
+      "step": 1,
+      "timestamp": "2026-02-22T08:01:21.857Z",
+      "model": "zai-org-glm-5",
+      "finishReason": "error",
+      "content": "inference failed: All inference providers failed:\nvenice: venice 402: {\"error\":\"Insufficient USD or Diem balance to complete request\"}",
+      "toolCalls": null
+    },
+    {
+      "step": 1,
+      "timestamp": "2026-02-22T08:01:32.068Z",
+      "model": "zai-org-glm-5",
+      "finishReason": "error",
+      "content": "inference failed: All inference providers failed:\nvenice: venice 402: {\"error\":\"Insufficient USD or Diem balance to complete request\"}",
+      "toolCalls": null
+    }
+  ],
+  "total_steps": 3,
+  "meta": {
+    "issues_open": 0,
+    "files_in_repo": 10
+  }
+}
